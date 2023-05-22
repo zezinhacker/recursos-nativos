@@ -4,6 +4,7 @@ const HomeScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
             <Button title='Informações do Dispositivo' onPress={() => navigation.navigate('DeviceInfo')} />
+            <Button title='Informações da bateria' onPress={() => navigation.navigate('BateriaScreen')} />
         </View>
     )
 }
