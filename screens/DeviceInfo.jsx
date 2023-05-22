@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import * as Device from 'expo-device'
 
 const styles = StyleSheet.create({
