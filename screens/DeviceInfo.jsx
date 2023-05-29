@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import * as Device from 'expo-device'
 
 const styles = StyleSheet.create({
@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
 export default function DeviceInfo() {
   return (
     <View>
+      <ScrollView>
        <Text style={styles.title}>INFORMAÇÕES DO APARELHO</Text>
       <Text style={styles.info}>
         O nome do dispositivo: {Device.deviceName}
@@ -63,6 +64,7 @@ export default function DeviceInfo() {
       <Text style={styles.info}>
         o design do dispositivo: {Device.designName}
       </Text>
+      </ScrollView>
     </View>
   );
 }
