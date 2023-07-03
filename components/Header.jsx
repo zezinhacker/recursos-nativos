@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { Button, StyleSheet, View } from "react-native";
 
 
 
@@ -18,13 +18,13 @@ const styles = StyleSheet.create({
         textAlignVertical: 'center',
         minHeight: 50,
         backgroundColor: '#969',
-        color: 'white',
+        color: 'green',
         fontWeight: 'bold',
         fontSize: 18,
         textAlign: 'center'
     },
     footer: {
-        backgroundColor: '#888',
+        backgroundColor: '#989',
         paddingHorizontal: 25,
         padding: 20,
     }

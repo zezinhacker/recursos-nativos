@@ -6,6 +6,8 @@ const HomeScreen = ({navigation}) => {
             <Button title='Informações do Dispositivo' onPress={() => navigation.navigate('DeviceInfo')} />
             <Button title='Informações da bateria' onPress={() => navigation.navigate('BateriaScreen')} />
             <Button title='Controles de tela' onPress={() => navigation.navigate('MyScreenOrientation')}/>
+            <Button title='Notificaçoes' onPress={() => navigation.navigate('Notificacoes')}/>
+            <Button title='ContactsInfo' onPress={() => navigation.navigate('ContactsInfo')}/>
         </View>
     )
 }
@@ -13,7 +15,7 @@ const HomeScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#1284',
       alignItems: 'center',
       justifyContent: 'center',
     },

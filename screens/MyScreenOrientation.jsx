@@ -5,7 +5,7 @@ import * as ScreenOrientation from 'expo-screen-orientation'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#45677",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -55,7 +55,7 @@ export default function MyScreenOrientation() {
         <Text style={styles.title}>INFORMAÇÕES DO TELA</Text>
         <Button title="padrao" onPress={padrao}/>
         <Button title="baixo" onPress={Down}/>
-        <Button title="deireita" onPress={Direita}/>
+        <Button title="direita" onPress={Direita}/>
         <Button title="esquerda" onPress={Esquerda}/>
       </ScrollView>
     </View>

@@ -1,15 +1,16 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import * as Device from 'expo-device'
+import Header from "../components/Header";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#4569",
     alignItems: "center",
     justifyContent: "center",
   },
   title: {
-    fontSize: 35,
+    fontSize: 32,
     backgroundColor: "#939",
     fontWeight: "bold",
     color: "#fff",
@@ -28,6 +29,8 @@ const styles = StyleSheet.create({
 
 export default function DeviceInfo() {
   return (
+    <View style={styles.container}>
+      <Header title="Device"/>
     <View>
       <ScrollView>
        <Text style={styles.title}>INFORMAÇÕES DO APARELHO</Text>
@@ -65,6 +68,7 @@ export default function DeviceInfo() {
         o design do dispositivo: {Device.designName}
       </Text>
       </ScrollView>
+    </View>
     </View>
   );
 }
