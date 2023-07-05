@@ -1,34 +1,24 @@
-import { Button, StyleSheet, View } from "react-native";
-
-
+import { Text, View, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        gap: 10
-    },
-    content: {
-        flex: 1,
-        gap: 20,
-        padding: 20,
-        alignSelf: 'center',
-    },
-    contentTextStyle: {
-        padding: 5,
-        textAlignVertical: 'center',
-        minHeight: 50,
-        backgroundColor: '#969',
-        color: 'green',
-        fontWeight: 'bold',
-        fontSize: 18,
-        textAlign: 'center'
-    },
-    footer: {
-        backgroundColor: '#989',
-        paddingHorizontal: 25,
-        padding: 20,
-    }
+  header: {
+    paddingTop: 30,
+    paddingBottom: 20,
+    backgroundColor: "#606",
+  },
+  headerTextStyle: {
+    marginTop: 10,
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 35,
+    textAlign: "center",
+  },
 });
-export default function Header() {
-    return <View></View>
+
+export default function Header({ title }) {
+  return (
+    <View style={styles.header}>
+      <Text style={styles.headerTextStyle}>{title}</Text>
+    </View>
+  );
 }
