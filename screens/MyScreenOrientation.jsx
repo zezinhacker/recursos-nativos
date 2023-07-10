@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, View, Button } from "react-native";
 import * as ScreenOrientation from "expo-screen-orientation";
 import Header from "../components/Header";
 
@@ -72,7 +72,7 @@ export default function MyScreenOrientation({ navigation }) {
 
   return (
     <View style={{ height: "100%" }}>
-      <Header title="Orientação da tela" />
+      <Header title="Orientação da tela"/>
       <View style={[styles.container, { backgroundColor }]}>
         <View style={{ justifyContent: "center", alignContent: "center" }}>
           <View style={{ marginBottom: 30 }} />

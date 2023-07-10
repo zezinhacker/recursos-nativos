@@ -1,5 +1,4 @@
 import { View, StyleSheet, Text, Button } from "react-native";
-import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import * as Battery from "expo-battery";
@@ -25,7 +24,7 @@ export default function BateriaScreen({navigation}){
         }
     }
 
-    const styles = StyleSheet.create({
+    const stylesBatery = StyleSheet.create({
         container: {
             flex: 1,
             gap: 10
@@ -37,6 +36,7 @@ export default function BateriaScreen({navigation}){
             alignSelf: 'center',
             fontSize: 30
         },
+        
     });
     async function atualizarTudo(){
         bateria()

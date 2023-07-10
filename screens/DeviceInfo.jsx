@@ -5,7 +5,7 @@ import Header from "../components/Header";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#4569",
+    backgroundColor: "#f2243546",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -19,21 +19,21 @@ const styles = StyleSheet.create({
   },
   info: {
     fontSize: 14,       
-    backgroundColor: "#5e4d85",
+    backgroundColor: "#ff124545",
     color: "#fff",
     marginBottom: 10,
     padding: 15,
 
   },
+  
 });
 
 export default function DeviceInfo() {
   return (
     <View style={styles.container}>
-      <Header title="Device"/>
+      <Header title="Informações do cell"/>
     <View>
       <ScrollView>
-       <Text style={styles.title}>INFORMAÇÕES DO APARELHO</Text>
       <Text style={styles.info}>
         O nome do dispositivo: {Device.deviceName}
       </Text>

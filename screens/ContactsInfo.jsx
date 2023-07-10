@@ -1,14 +1,5 @@
 import React, { useState, useCallback } from "react";
-import {
-  Button,
-  FlatList,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
+import {Button,FlatList,StyleSheet,Text,TextInput,View,TouchableOpacity,Alert,} from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import * as Contacts from "expo-contacts";
 import { Notifications } from "expo";
