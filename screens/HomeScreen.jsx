@@ -8,6 +8,7 @@ const HomeScreen = ({navigation}) => {
             <Button title='Controles de tela' onPress={() => navigation.navigate('MyScreenOrientation')}/>
             <Button title='Notificaçoes' onPress={() => navigation.navigate('Notificacoes')}/>
             <Button title='ContactsInfo' onPress={() => navigation.navigate('ContactsInfo')}/>
+            <Button title='TRY' onPress={() => navigation.navigate('trySeForCapaz')}/>
         </View>
     )
 }

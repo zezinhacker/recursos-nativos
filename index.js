@@ -7,6 +7,7 @@ import BateriaScreen from './screens/BateriaScreen';
 import MyScreenOrientation from './screens/MyScreenOrientation';
 import Notificacoes from './screens/Notificacoes';
 import ContactsInfo from './screens/ContactsInfo';
+import trySeForCapaz from './screens/trySeForCapaz';
 
 const Stack = createStackNavigator()
 
@@ -20,6 +21,7 @@ const RootNavigation = () => {
                 <Stack.Screen name='MyScreenOrientation' component={MyScreenOrientation} options={{headerShown: true}} />
                 <Stack.Screen name="Notificacoes" component={Notificacoes} options={{HeaderShown: true}} />
                 <Stack.Screen name="ContactsInfo" component={ContactsInfo} options={{HeaderShown: true}} /> 
+                <Stack.Screen name="trySeForCapaz" component={trySeForCapaz} options={{HeaderShown: true}} />
             </Stack.Navigator>
         </NavigationContainer>
     )

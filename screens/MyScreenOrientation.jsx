@@ -102,6 +102,21 @@ export default function MyScreenOrientation({ navigation }) {
   );
 }
 
+const stylesOrientation = StyleSheet.create({
+  header: {
+    paddingTop: 30,
+    paddingBottom: 20,
+    backgroundColor: "#f2243546",
+  },
+  headerTextStyle: {
+    marginTop: 10,
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 35,
+    textAlign: "center",
+  },
+});
+
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
