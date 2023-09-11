@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as LocalAuthentication from 'expo-local-authentication'
 import Header from "../components/Header";
 
@@ -32,15 +32,17 @@ export default function MyLocalAuthentication( navigation ) {
     const autenticar = async () => {
         try{
             const disponivel = await LocalAuthentication.hasHardwareAsync();
-
+            console.log(disponivel)
             if(!disponivel){
                 alert('Você n tem isso')
                 return
             }
-            const { sucess, error } =  await LocalAuthentication.authenticationAsync()
+            const { sucess, error } =  await LocalAuthentication.authenticateAsync()
+
             if(sucess){
                 alert("acessa ai");
             } else {
+                console.log(error)
                 alert("Nao acessa ai")
             }
         } catch (error) {
@@ -54,9 +56,10 @@ export default function MyLocalAuthentication( navigation ) {
       <Header title="Atentificação"/>
         <View>
             <TouchableOpacity styles={styles.button}>
-                <Text style={styles.text}>Autenticar</Text>
+                <Button title="Autenticar" onPress={autenticar}/>
             </TouchableOpacity>
         </View>
     </View>
   );
 }
+
