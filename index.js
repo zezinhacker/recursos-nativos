@@ -10,6 +10,7 @@ import ContactsInfo from './screens/ContactsInfo';
 import Sensor from './screens/Sensor';
 import PrintScreen from './screens/PrintScreen';
 import LocalAuthentication from './screens/LocalAuthentication'
+import CameraInfo from './screens/CameraInfo';
 
 const Stack = createStackNavigator()
 
@@ -26,6 +27,7 @@ const RootNavigation = () => {
                 <Stack.Screen name="Sensor" component={Sensor} options={{HeaderShown: true}} />
                 <Stack.Screen name="PrintScreen" component={PrintScreen} options={{HeaderShown: true}} />
                 <Stack.Screen name="LocalAuthentication" component={LocalAuthentication} options={{HeaderShown: true}} />
+                <Stack.Screen name="CameraInfo" component={CameraInfo} options={{HeaderShown: true}} />
             </Stack.Navigator>
         </NavigationContainer>
     )
