@@ -1,4 +1,6 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { useEffect } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import * as Location from 'expo-location';
 
 
 const styles = StyleSheet.create({
@@ -27,10 +29,37 @@ const styles = StyleSheet.create({
   
 });
 
-export default function DeviceInfo() {
+export default function location({ navigation }) {
+    const [ location, setLocation ] = useState(null)
+
+    useEffect(() => {
+      (async () => {
+        let { status } = await Location.requestForeGroundPermissionAsync();
+        if  (status !== 'granted') {
+          console.log('nao tem permissao')
+          return;
+        }
+
+        let info = await Location.getCurrentPositionAsync({})
+        console.log(location)
+        setLocation(info)
+      })()
+    }, [])
+
+
   return (
-    <View style={styles.container}>
-        
-    </View>
+      <View>
+        <View>
+          {
+            !location
+            ? (<Text>Carregando...</Text>)
+            : (
+              <Text>
+                Latitude: {location.coords.latitude}, Longitude: {location.coords.longitude}
+              </Text>
+            )
+          }
+        </View>
+      </View>
   );
 }
