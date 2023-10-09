@@ -12,6 +12,7 @@ const HomeScreen = ({navigation}) => {
             <Button title='PrintScreen' onPress={() => navigation.navigate('PrintScreen')}/>
             <Button title='Autentificação' onPress={() => navigation.navigate('LocalAuthentication')}/>
             <Button title='Camera' onPress={() => navigation.navigate('CameraInfo')}/>
+            <Button title='Localization' onPress={() => navigation.navigate('Localizations')}/>
         </View>
     )
 }

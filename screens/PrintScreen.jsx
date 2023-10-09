@@ -1,6 +1,7 @@
-import { Button, StyleSheet, View } from "react-native";
+import { Alert, Button, StyleSheet, View } from "react-native";
 import Header from "../components/Header";
 import * as ScreenCapture from 'expo-screen-capture';
+import { useEffect } from "react";
 
 const styles = StyleSheet.create({
   container: {
@@ -29,19 +30,38 @@ const styles = StyleSheet.create({
 });
 
 export default function PrintScreen({ navigation }) {
-    const active = async () => {
-        await ScreenCapture.preventScreenCaptureAsync();
+  useEffect(() => {
+    if (hasPermissions()) {
+        const subscription = ScreenCapture.addScreenshotListener(() => {
+            Alert.alert('Success', 'Screenshot captured')
+        });
+        return () => subscription.remove();
     }
-    const deactive = async () => {
-        await ScreenCapture.allowScreenCaptureAsync();
-    }
-  return (
+}, []);
+
+const hasPermissions = async () => {
+    const { status } = await MediaLibrary.requestPermissionsAsync();
+    return status === 'granted';
+};
+
+const activate = async () => {
+    await ScreenCapture.preventScreenCaptureAsync();
+    Alert.alert('Info', 'Screen capture is now blocked')
+};
+
+const deactivate = async () => {
+    await ScreenCapture.allowScreenCaptureAsync();
+    Alert.alert('Info', 'Screen capture is now allowed')
+};
+
+return (
     <View style={styles.container}>
-      <Header title="Captura de tela" />
-      <View style={styles.container}>
-        <Button title="Ativar" onPress={active}/>
-        <Button title="Desativar" onPress={deactive}/>
-      </View>
+        <Header title='Captura de Tela' />
+        <View style={styles.center}>
+            <Button title="Activate" onPress={activate} />
+            <Button title="Deactivate" onPress={deactivate} />
+        </View>
     </View>
-  );
-}
+)
+};
+

@@ -1,65 +1,129 @@
-import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import * as LocalAuthentication from 'expo-local-authentication'
-import Header from "../components/Header";
+import React, { useEffect, useState } from 'react';
+import { View, Button, Alert, Text } from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f2243546",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 32,
-    backgroundColor: "#939",
-    fontWeight: "bold",
-    color: "#fff",
-    marginBottom: 10,
-    padding: 10,
-  },
-  info: {
-    fontSize: 14,       
-    backgroundColor: "#ff124545",
-    color: "#fff",
-    marginBottom: 10,
-    padding: 15,
+import * as LocalAuthentication from 'expo-local-authentication';
+import * as ScreenCapture from 'expo-screen-capture';
+import * as MediaLibrary from 'expo-media-library';
 
-  },
-  
-});
+import styles from '../screens/styles/styles';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
-export default function MyLocalAuthentication( navigation ) { 
-    const autenticar = async () => {
-        try{
-            const disponivel = await LocalAuthentication.hasHardwareAsync();
-            console.log(disponivel)
-            if(!disponivel){
-                alert('Você n tem isso')
-                return
+const LocalAuthenticationScreen = () => {
+    const [isTimerEnabled, setIsTimerEnabled] = useState(false);
+
+    const [timeRemaining, setTimeRemaining] = useState(15);
+
+    const authenticateWithBiometrics = async () => {
+        try {
+            const hasHardware = await LocalAuthentication.hasHardwareAsync();
+            if (!hasHardware) {
+                Alert.alert('Error:', 'Autenticação não suportada');
+                return;
             }
-            const { sucess, error } =  await LocalAuthentication.authenticateAsync()
 
-            if(sucess){
-                alert("acessa ai");
-            } else {
-                console.log(error)
-                alert("Nao acessa ai")
+            const isEnrolled = await LocalAuthentication.isEnrolledAsync();
+            if (!isEnrolled) {
+                Alert.alert('Error:', 'Nenhuma biometria cadastrada');
+                return;
+            }
+
+            const supportedTypes = await LocalAuthentication.supportedAuthenticationTypesAsync();
+            if (supportedTypes.includes(LocalAuthentication.AuthenticationType.FINGERPRINT)) {
+                const { success, error } = await LocalAuthentication.authenticateAsync({
+                    promptMessage: 'Use Autenticação Biométrica para autenticar',
+                    authenticationType: LocalAuthentication.AuthenticationType.FINGERPRINT,
+                });
+
+                if (success && !isTimerEnabled) {
+                    Alert.alert('Success', 'Autenticação realizada com sucesso');
+                } else if (error === 'user_cancel') {
+                    Alert.alert('Error:', 'Autenticação cancelada pelo usuário');
+                }else if(error === 'lockout') {
+                    Alert.alert('Error:', 'Autenticação bloqueada');
+                }else if(error === 'lockout_permanent') {
+                    Alert.alert('Error:', 'Autenticação bloqueada permanentemente');
+                }else if(error === 'too_many_attempts') {
+                    Alert.alert('Error:', 'Muitas tentativas de autenticação');
+                }else {
+                    Alert.alert('Error:', 'Autenicação falhou');
+                }
+                
+                setIsTimerEnabled(true);
+            }else if (supportedTypes.includes(LocalAuthentication.AuthenticationType.FACIAL_RECOGNITION)) {
+                const { success, error } = await LocalAuthentication.authenticateAsync({
+                    promptMessage: 'Use Face ID para autenticar',
+                    authenticationType: LocalAuthentication.AuthenticationType.FACIAL_RECOGNITION,
+                });
+
+                if (success && !isTimerEnabled) {
+                    Alert.alert('Success', 'Autenticação realizada com sucesso');
+                } else if (error === 'user_cancel') {
+                    Alert.alert('Error:', 'Autenticação cancelada pelo usuário');
+                }else if(error === 'lockout') {
+                    Alert.alert('Error:', 'Autenticação bloqueada');
+                }else if(error === 'lockout_permanent') {
+                    Alert.alert('Error:', 'Autenticação bloqueada permanentemente');
+                }else if(error === 'too_many_attempts') {
+                    Alert.alert('Error:', 'Muitas tentativas de autenticação');
+                }else {
+                    Alert.alert('Error:', 'Autenicação falhou');
+                }
+
+                setIsTimerEnabled(true);
+            }else {
+                Alert.alert('Error:', 'Nenhum método de autenticação disponível neste dispositivo.');
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     };
 
+    
+    const inativeButton = (bol) => {
+        if (bol) {
+            const interval = setInterval(() => {
+                setTimeRemaining(timer => {
+                    if (timer > 0) {
+                        return timer - 1;
+                    }
+                    clearInterval(interval);
+                    setIsTimerEnabled(false);
+                    
+                    return (timer == 0 ? timeRemaining : timer);
+                });
+            }, 1000);
+    
+            return () => clearInterval(interval);
+        }
+    };
+    
+    const hasPermissions = async () => {
+        const { status } = await MediaLibrary.requestPermissionsAsync();
+        return status === 'granted';
+    }
 
-  return (
-    <View style={styles.container}>
-      <Header title="Atentificação"/>
-        <View>
-            <TouchableOpacity styles={styles.button}>
-                <Button title="Autenticar" onPress={autenticar}/>
-            </TouchableOpacity>
+    useEffect(() => {
+        inativeButton(isTimerEnabled)
+
+        if (hasPermissions()) {
+            return async () => {
+                await ScreenCapture.preventScreenCaptureAsync();
+            };
+        }
+        
+    }, [isTimerEnabled]);
+
+    return (
+        <View style={styles.container}>
+            <Header title='Autenticador' />
+            <View style={styles.center}>
+                <Button disabled={isTimerEnabled} title='Autenticar' onPress={authenticateWithBiometrics} />
+                {isTimerEnabled && <Text>Tempo restante: {(timeRemaining <= 9 ? `0${timeRemaining}` : timeRemaining)} segundos</Text>}
+            </View>
+            <Footer text='Sair' />
         </View>
-    </View>
-  );
+    );
 }
 
+export default LocalAuthenticationScreen;
