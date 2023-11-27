@@ -1,18 +1,10 @@
-import { Button, View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 
 const HomeScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
-            <Button title='Informações do Dispositivo' onPress={() => navigation.navigate('DeviceInfo')} />
-            <Button title='Informações da bateria' onPress={() => navigation.navigate('BateriaScreen')} />
-            <Button title='Controles de tela' onPress={() => navigation.navigate('MyScreenOrientation')}/>
-            <Button title='Notificaçoes' onPress={() => navigation.navigate('Notificacoes')}/>
-            <Button title='ContactsInfo' onPress={() => navigation.navigate('ContactsInfo')}/>
-            <Button title='Sensor' onPress={() => navigation.navigate('Sensor')}/>
-            <Button title='PrintScreen' onPress={() => navigation.navigate('PrintScreen')}/>
-            <Button title='Autentificação' onPress={() => navigation.navigate('LocalAuthentication')}/>
-            <Button title='Camera' onPress={() => navigation.navigate('CameraInfo')}/>
-            <Button title='Localization' onPress={() => navigation.navigate('Localizations')}/>
+            <Text>Seja Bem-vindo ao Nosso App</Text>
+            <Text>Equipe: Pedro e Luiz</Text>
         </View>
     )
 }
